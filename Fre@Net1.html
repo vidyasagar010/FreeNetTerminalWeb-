@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Fre@Net System</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="Fre@Net.png">
+<link rel="stylesheet" href="vidya.css">
+</head>
+<body>
+  <div class="logo-container">
+  <img src="Fre@Net.png" alt="Fre@Net Logo" class="logo" height="200">>
+</div>
+<canvas id="matrix"></canvas>
+
+<div class="grid"></div>
+
+<div class="terminal" id="terminal"></div>
+
+<div class="status" id="status">Initializing...</div>
+
+<div class="dashboard">
+  <div class="card">
+    <h3>System Status</h3>
+    <p>Online Nodes: 128</p>
+  </div>
+  <div class="card">
+    <h3>Security</h3>
+    <p>Firewall: Active</p>
+  </div>
+  <div class="card">
+    <h3>Access Control</h3>
+    <div class="btn" onclick="grantAccess()">Grant Access</div>
+    <div class="btn" onclick="denyAccess()">Deny Access</div>
+  </div>
+</div>
+
+<div class="sound" onclick="toggleSound()">🔊</div>
+
+<audio id="bgSound" loop>
+<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3">
+</audio>
+
+<script>
+// MATRIX BACKGROUND
+const canvas = document.getElementById("matrix");
+const ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const letters = "011ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+[]{}|;:'\",.<>/?`~";
+const fontSize = 14;
+const columns = canvas.width / fontSize;
+const drops = Array(Math.floor(columns)).fill(1);
+
+function draw() {
+  ctx.fillStyle = "rgba(0,0,0,0.05)";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  ctx.fillStyle = "#00ff9f";
+  ctx.font = fontSize + "px monospace";
+
+  for (let i = 0; i < drops.length; i++) {
+    const text = letters[Math.floor(Math.random() * letters.length)];
+    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+    if (drops[i] * fontSize > canvas.height && Math.random() > 0.97)
+      drops[i] = 0;
+
+    drops[i]++;
+  }
+}
+setInterval(draw, 33);
+
+// TERMINAL TYPING
+const terminal = document.getElementById("terminal");
+
+const lines = [
+  "Connecting to Fre@Net server...",
+  "Bypassing firewall...",
+  "Injecting payload...",
+  "Accessing secure node...",
+  "Decrypting data...",
+  "System ready."
+
+];
+
+let i = 0;
+
+function typeLine() {
+  if (i < lines.length) {
+    let line = lines[i];
+    let char = 0;
+    let interval = setInterval(() => {
+      terminal.innerHTML += line.charAt(char);
+      char++;
+      if (char === line.length) {
+        terminal.innerHTML += "<br>";
+        clearInterval(interval);
+        i++;
+        setTimeout(typeLine, 500);
+      }
+    }, 40);
+  }
+}
+typeLine();
+
+// ACCESS CONTROL
+function grantAccess() {
+  document.getElementById("status").innerText = "ACCESS GRANTED ✅";
+}
+
+function denyAccess() {
+  document.getElementById("status").innerText = "ACCESS DENIED ❌";
+}
+
+// SOUND
+const sound = document.getElementById("bgSound");
+
+function toggleSound() {
+  if (sound.paused) sound.play();
+  else sound.pause();
+}
+</script>
+
+</body>
+</html>

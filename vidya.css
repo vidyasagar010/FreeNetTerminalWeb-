@@ -1,0 +1,97 @@
+body {
+  margin: 0;
+  background: black;
+  color: #00ff9f;
+  font-family: monospace;
+  overflow: hidden;
+}
+
+
+/* BACKGROUND */
+canvas { position: fixed; top:0; left:0; z-index:-2; }
+.grid {
+  position: fixed;
+  width:100%; height:100%;
+  background-image:
+    linear-gradient(rgba(0,255,150,0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,255,150,0.1) 1px, transparent 1px);
+  background-size: 40px 40px;
+  z-index:-1;
+}
+
+/* TERMINAL */
+.terminal {
+  position: absolute;
+  top: 2%;
+  left: 1%;
+  width: 25%;
+  height: 70%;
+  border: 1px solid #00ff9f;
+  padding: 15px;
+  overflow-y: auto;
+  background: rgba(0,0,0,0.7);
+}
+
+/* STATUS */
+.status {
+  position: absolute;
+  top: 80%;
+  left: 5%;
+  font-size: 22px;
+}
+
+/* DASHBOARD */
+.dashboard {
+  position: absolute;
+  right: 5%;
+  top: 10%;
+  width: 30%;
+}
+
+.card {
+  border: 1px solid #00ff9f;
+  padding: 15px;
+  margin-bottom: 15px;
+  background: rgba(0,0,0,0.6);
+}
+
+/* BUTTON */
+.btn {
+  padding: 10px;
+  border: 1px solid #00ff9f;
+  cursor: pointer;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+/* SOUND BUTTON */
+.sound {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  border: 1px solid #00ff9f;
+  padding: 10px;
+  cursor: pointer;
+}
+.logo-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.logo {
+  width: 300px;
+  max-width: 80%;
+  filter: drop-shadow(0 0 20px #00ff9f)
+          drop-shadow(0 0 40px #00ff9f)
+          drop-shadow(0 0 60px #00ff9f);
+  transition: 0.3s;
+}
+
+.logo:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 30px #00ff9f)
+          drop-shadow(0 0 60px #00ff9f)
+          drop-shadow(0 0 90px #00ff9f);
+}
